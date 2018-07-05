@@ -18,15 +18,19 @@ int main(void)
   initLEDs();                   /* LED Strip PWM */
   initUSART();
 
+  initNodes();
+  
   printString("OK");
-
-  setChannel(17);
 
   uint16_t rssi;
 
   while (1) {
-    rssi = readRssi();
-    printWord(rssi);
+    for (uint8_t i = 0; i < NUM_NODES; i++) {
+      setChannel(nodes[i].channelIndex);
+      rssi = readRssi();
+      printWord(rssi);
+    }
+    printString("\n");
   }
   return (0);
 }
