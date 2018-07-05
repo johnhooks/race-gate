@@ -18,6 +18,7 @@
 
 // My stuff
 #include "pinDefines.h"
+#include "millis.h"
 #include "led.h"
 #include "receiver.h"
 #include "node.h"
