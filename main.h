@@ -1,7 +1,7 @@
 // Standard AVR includes
 #include <avr/io.h>
-// #include <util/delay.h>
-// #include <avr/interrupt.h>
+#include <util/delay.h>
+#include <avr/interrupt.h>
 // #include <avr/eeprom.h>
 #include <avr/pgmspace.h>
 // #include <avr/sleep.h>
@@ -17,5 +17,6 @@
 #include "macros.h"
 
 // My stuff
-#include "rx5808.h"
 #include "pinDefines.h"
+#include "led.h"
+#include "receiver.h"
