@@ -1,3 +1,6 @@
+#define DEBUG
+
+
 #include "main.h"
 
 
@@ -9,21 +12,17 @@ int main(void)
   initADC();                    /* RSSI Reading */
   initSPI();                    /* RX5808 SPI */
   initLEDs();                   /* LED Strip PWM */
+
+  initNodes();                  /* Zero out readings arrays */
+
+  #ifdef DEBUG
   initUSART();
-
-  initNodes();
-  
-  printString("OK");
-
-  uint16_t rssi;
+  printString("DEBUG ENABLED");
+  #endif
 
   while (1) {
-    for (uint8_t i = 0; i < NUM_NODES; i++) {
-      setChannel(nodes[i].channelIndex);
-      rssi = readRssi();
-      printWord(rssi);
-    }
-    printString("\n");
+    setStrip(255, 75, 5);
+    nodesUpdate();
   }
   return (0);
 }

@@ -13,7 +13,7 @@ void millis_init()
   sei();
 }
 
-millis_t millis()
+millis_t millis_get()
 {
   millis_t ms;
   ATOMIC_BLOCK(ATOMIC_RESTORESTATE)

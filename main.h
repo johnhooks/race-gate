@@ -13,12 +13,14 @@
 
 // These are optional, but nice to have around.
 // Feel free to comment them out if you don't use them.
+#ifdef DEBUG
 #include "USART.h"
+#endif
+
 #include "macros.h"
 
 // My stuff
 #include "pinDefines.h"
 #include "millis.h"
 #include "led.h"
-#include "receiver.h"
 #include "node.h"
