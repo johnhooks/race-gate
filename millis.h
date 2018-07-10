@@ -2,10 +2,6 @@
 #define MILLIS_H
 
 
-#include <avr/interrupt.h>
-#include <util/atomic.h>
-
-
 typedef uint32_t millis_t;
 
 

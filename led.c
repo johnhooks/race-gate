@@ -1,4 +1,20 @@
+#include <avr/io.h>
+#include "pinDefines.h"
+#include "millis.h"
 #include "led.h"
+
+
+#define FIXPOINT 6
+#define BRIGHTNESS 100
+#define BRIGHTNESS_RATIO (BRIGHTNESS << FIXPOINT) / 255
+#define DIM(X) ((X) * BRIGHTNESS_RATIO) >> FIXPOINT
+
+
+uint8_t rainbowing = 1;
+
+
+static uint8_t wheelPos = 0;
+static uint32_t ledTimeout = 0;
 
 
 void initLEDs(void)
@@ -19,9 +35,33 @@ void initLEDs(void)
   TCCR2A |= (1 << COM2B1);      /* PWM output on OCR2B */
 }
 
-void setStrip(uint8_t r, uint8_t g, uint8_t b)
+void setStrip(color_t color)
 {
-  LED_PWM_R = r;
-  LED_PWM_G = g;
-  LED_PWM_B = b;
+  LED_PWM_R = color.r;
+  LED_PWM_G = color.g;
+  LED_PWM_B = color.b;
+}
+
+// Input a value 0 to 255 to get a color value.
+// The colours are a transition r - g - b - back to r.
+color_t wheel(uint8_t wheelPos) {
+  wheelPos = 255 - wheelPos;
+  if (wheelPos < 85) {
+    return (color_t) { 255 - wheelPos * 3, 0, 3 * wheelPos };
+  }
+  if (wheelPos < 170) {
+    wheelPos -= 85;
+    return (color_t) { 0, 3 * wheelPos, 255 - wheelPos * 3 };
+  }
+  wheelPos -= 170;
+  return (color_t) { 3 * wheelPos, 255 - wheelPos * 3, 0 };
+}
+
+void rainbow(uint16_t wait)
+{
+  uint32_t now = millis_get();
+  if (ledTimeout < now) {
+    ledTimeout = now + wait;
+    setStrip(wheel(wheelPos++));
+  }
 }

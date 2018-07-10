@@ -11,16 +11,12 @@
 // Standard includes
 #include <stdlib.h>
 
-// These are optional, but nice to have around.
-// Feel free to comment them out if you don't use them.
-#ifdef DEBUG
-#include "USART.h"
-#endif
-
-#include "macros.h"
-
 // My stuff
+#include "macros.h"
+#include "debug.h"
 #include "pinDefines.h"
 #include "millis.h"
 #include "led.h"
+#include "receiverSpi.h"
+#include "receiver.h"
 #include "node.h"

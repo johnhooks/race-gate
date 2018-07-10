@@ -2,25 +2,27 @@
 #define NODE_H
 
 
+#include "led.h"
+
+
 #define NUM_NODES 5
 #define NUM_READINGS 5
-#define LAP_THRESHOLD 180
 
 
-#include <avr/io.h>
-#include "millis.h"
-#include "receiver.h"
-#include "USART.h"
-
-
-struct node_t {
+typedef struct node_t {
   uint16_t channelIndex;
-  uint16_t readings[NUM_READINGS];
+  color_t color;
+  uint8_t readings[NUM_READINGS]; /* 8 bits per reading is enough */
   uint8_t readIndex;
   uint16_t total;
-  uint16_t average;
-  uint32_t lastLap;
-};
+  uint8_t averageRssi;
+  uint8_t peakRssi;
+  uint32_t lapTimeout;
+  uint8_t isGeneratingLap;
+  uint8_t isActive;
+  uint8_t genCount;
+  uint8_t peakCount;
+} node_t;
 
 
 void initNodes(void);
