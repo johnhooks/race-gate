@@ -2,12 +2,7 @@
 #define RECEIVER_H
 
 
-#include "pinDefines.h"
-#include "receiverSpi.h"
-#include "millis.h"
-
-
-#define MIN_TUNE_TIME 30
+#include <stdint.h>
 
 
 void initADC(void);

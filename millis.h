@@ -2,6 +2,9 @@
 #define MILLIS_H
 
 
+#include <stdint.h>
+
+
 typedef uint32_t millis_t;
 
 

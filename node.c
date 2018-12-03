@@ -10,6 +10,26 @@
 #define LAP_MIN_TIME 3000       /* milliseconds */
 
 
+#define NUM_NODES 5
+#define NUM_READINGS 5
+
+
+typedef struct node_t {
+  uint16_t channelIndex;
+  color_t color;
+  uint8_t readings[NUM_READINGS]; /* 8 bits per reading is enough */
+  uint8_t readIndex;
+  uint16_t total;
+  uint8_t averageRssi;
+  uint8_t peakRssi;
+  uint32_t lapTimeout;
+  uint8_t isGeneratingLap;
+  uint8_t isActive;
+  uint8_t genCount;
+  uint8_t peakCount;
+} node_t;
+
+
 static enum statuses { init, tune, next } status;
 
 
@@ -103,8 +123,8 @@ static void update(void)
 #ifdef DEBUG
         printString("LAP!\n");
 #endif
-        setStrip(node->color);
-        rainbowing = 0;
+        // setStrip(node->color);
+        // rainbowing = 0;
         return;
       }
     }

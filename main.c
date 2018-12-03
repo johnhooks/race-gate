@@ -18,7 +18,7 @@ int main(void)
   while (1) {
     nodesUpdate();
     if (rainbowing) {
-      rainbow(50);
+      rainbow(100);
     }
   }
   return (0);

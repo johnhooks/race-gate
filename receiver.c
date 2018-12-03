@@ -1,4 +1,14 @@
+#include <avr/io.h>
+
+
 #include "receiver.h"
+#include "pinDefines.h"
+#include "channels.h"
+#include "receiverSpi.h"
+#include "millis.h"
+
+
+#define MIN_TUNE_TIME 30
 
 
 uint32_t receiverTimeout;

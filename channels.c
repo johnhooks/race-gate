@@ -1,3 +1,6 @@
+#include <avr/pgmspace.h>
+
+
 #include "channels.h"
 
 

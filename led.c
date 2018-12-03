@@ -1,7 +1,9 @@
 #include <avr/io.h>
+
+
+#include "led.h"
 #include "pinDefines.h"
 #include "millis.h"
-#include "led.h"
 
 
 #define FIXPOINT 6
@@ -35,11 +37,16 @@ void initLEDs(void)
   TCCR2A |= (1 << COM2B1);      /* PWM output on OCR2B */
 }
 
+uint8_t dim(uint8_t color, uint16_t brightness)
+{
+  return (color * brightness) >> 8;
+}
+
 void setStrip(color_t color)
 {
-  LED_PWM_R = color.r;
-  LED_PWM_G = color.g;
-  LED_PWM_B = color.b;
+  LED_PWM_R = dim(color.r, 50);
+  LED_PWM_G = dim(color.g, 50);
+  LED_PWM_B = dim(color.b, 50);
 }
 
 // Input a value 0 to 255 to get a color value.

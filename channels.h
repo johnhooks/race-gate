@@ -2,7 +2,7 @@
 #define CHANNELS_H
 
 
-#include <avr/pgmspace.h>
+#include <stdint.h>
 
 
 extern const uint16_t channelTable[];

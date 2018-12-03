@@ -1,4 +1,18 @@
+#include <avr/io.h>
+#include <util/delay.h>
+
+
+#include "pinDefines.h"
+#include "channels.h"
 #include "receiverSpi.h"
+
+
+#define SLAVE_SELECT   SPI_SS_PORT &= ~(1 << SPI_SS)
+#define SLAVE_DESELECT SPI_SS_PORT |= (1 << SPI_SS)
+
+
+#define SPI_ADDRESS_SYNTH_A 0x01
+
 
 /**
  * Format is LSB first, with the following bits in order:
